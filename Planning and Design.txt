@@ -7,8 +7,11 @@
 
     3. There is a Manager , the account that deploys and controls the contract
 
-    4. At some point if there are atleast 3 players, the Manager can pick a random winner from the player list. Only the manager is allowed to see 
+    4. At some point if there are atleast 10 players, the Manager can pick a random winner from the player list. Only the manager is allowed to see 
        see the contract balance and randomly select the winner
 
     5. The contract will transfer the entire balance to winner's address and the lottery is reset for the next round
-          
+
+    6. The manager should not be able to participate in the lottery
+
+    7. The manager receives a fee of 10% of the lottery funds.
