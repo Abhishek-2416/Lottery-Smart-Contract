@@ -13,6 +13,7 @@ contract Lottery{
     //The user can enter the lottery simply by sending 0.1ether to the  contract and for that we need the receive or fallback function
     receive() external payable { //By using this function now the contract will be able to receive ether sent to it
          require(msg.value == 0.1 ether);
+         require(msg.sender != manager);
          players.push(payable(msg.sender));
 
     }
@@ -32,13 +33,14 @@ contract Lottery{
     //The problem with the abhove solution of the random block is the miner can manupulate and choose not to publish a block until he wishes to do so,in smart contracts the reccomended way to implement random numbers is by using an oracle
     function pickWinner() public {
         require(msg.sender == manager);
-        require(players.length >= 3);
+        require(players.length >= 10);
 
         uint r = random();
         uint index = r % (players.length);
         address payable winner;
 
         winner = players[index];
+        payable(manager).transfer(getBalance()/10);
         winner.transfer(getBalance());
         players = new address payable[](0); //This is reseting the lottery
     }
